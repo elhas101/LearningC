@@ -5,8 +5,8 @@ We will interpret the component x as the real part,
 and y as the imaginary part
 */
 typedef struct _complex {
-	double x, // real 
-	double y*I // imaginary
+	long double x, // real 
+	long double y*I // imaginary
 } complex;
 
 /* function mult2 that takes two complex structures, a and b,

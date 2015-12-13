@@ -1,8 +1,11 @@
-all: fibonacci
+all: fibonacci clean
 
-run:
-	echo "Running: fibonacci"
+run: all
 	./fibonacci
 
 clean:
-	rm -f fibonacci fibonacci.o
+	rm -f fibonacci.o 
+
+cleaner: clean
+	rm -f fibonacci
+
