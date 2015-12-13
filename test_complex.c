@@ -1,15 +1,22 @@
 #include <stdio.h>
-#include <complex.h>
+#include "complex.h"
 
 /* function mult2 that takes two complex structures, a and b,
 and returns a complex structure representing their product. 
 [Recall if a = x1 + y1 i and b = x2 + y2 i, 
 then a * b = (x1 * x2 - y1 * y2) + (x1 * y2 + x2 * y1) i ]
 */
-complex mult2(complex a, complex b) {
+
+int main(void) {
+
+	test();
+ 	return 0;
+}
+
+complex mult2(complex *a,  complex *b) {
 	complex c;
-	c.x = (a.x * b.x - a.y * b.y);
-	c.y = (a.x * b.y + b.x * a.y);
+	c.x = a->x*b->x - a->y*b->y;
+	c.y = a->x*b->y+a->y*b->x;
 	return c;
 }; 
 
@@ -29,10 +36,10 @@ returns a complex structure representing their sum.
 (x1 + x2) + (y1 + y2) i ]
 */
 
-complex add2(complex a, complex b) {
+complex add2(complex *a, complex *b) {
 	complex add;
-	add.x = a.x + b.x;
-	add.y = a.y + b.y;
+	add.x = a->x + b->x;
+	add.y = a->y+b->y;
 	return add;
 };
 
@@ -40,9 +47,10 @@ complex add2(complex a, complex b) {
 and returns a complex structure representing the juliamap: z^2 + c.
 */
 
-int juliamap(complex a, complex b) {
-	complex jm;
-	jm = add2(square(a), b);
+complex juliamap(complex a, complex b) {
+	complex jm, a_tmp;
+	a_tmp = square(a);
+	jm = add2(&a_tmp, &b);
 	return jm;
 };
 
@@ -52,8 +60,8 @@ prints the string "z = x + y i" where x and y are its
 real and imaginary parts.
 */
 
-int complex_print(complex z) {
-	printf("z = %1f + %1fi", z.x, z.y);
+void complex_print(const complex z) {
+	printf ("z = %.1Lf+%.1Lfi\n",z.x,z.y);
 };
 
 /*
@@ -70,25 +78,20 @@ void test() {
 	b.y = 5;
 	printf("Input a and b where a + ib is the first complex number.\n");
 	printf("a = ");
-	scanf("%f", &a.x);
+	scanf("%Lf", &a.x);
 	printf("b = ");
-	scanf("%f", &a.y);
+	scanf("%Lf", &a.y);
 	printf("Input c and d where c + id is the second complex number.\n");
 	printf("c = ");
-	scanf("%f", &b.x);
+	scanf("%Lf", &b.x);
 	printf("d = ");
-	scanf("%f", &b.y);
-	printf ("You have entered the complex numbers :%.1f %+.1f and %.1f %+.1fi\n", a.x,a.y,b.x,b.y);
-	printf ("Testing multiplication of complex numbers are :%.1f %+.1fi\n", mult2(a,b).x, mult2(a,b).y);
-	printf ("Testing square of complex number is :%.1f %+.1fi\n", square(a).x, square(a).y);
-	printf ("Testing addition of complex numbers are :%.1f %+.1fi\n", add2(a,b).x, add2(a,b).y);
-	printf ("Testing juliamap of complex numbers are :%.1f %+.1fi\n", juliamap(a,b).x, juliamap(a,b).y);
+	scanf("%Lf", &b.y);
+	printf ("You have entered the complex numbers entered are :%.1Lf %+.1Lf and %.1Lf %+.1Lfi\n", a.x,a.y,b.x,b.y);
+	printf ("The multiplication of complex numbers is :%.1Lf %+.1Lfi\n", mult2(&a,&b).x, mult2(&a,&b).y);
+	printf ("The square of complex number is :%.1Lf %+.1Lfi\n", square(a).x, square(a).y);
+	printf ("The addition of complex numbers are :%.1Lf %+.1Lfi\n", add2(&a,&b).x, add2(&a,&b).y);
+	printf ("The juliamap of complex numbers are :%.1Lf %+.1Lfi\n", juliamap(a,b).x, juliamap(a,b).y);
 	complex_print(a);
 	complex_print(b);
 }
 
-int main(void) {
-
-	test();
- 	return 0;
-}
