@@ -1,0 +1,2 @@
+This is the first line of the file.
+Input as a float: 4.55	Input as an int : 4
