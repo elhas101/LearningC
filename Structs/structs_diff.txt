@@ -1,0 +1,13 @@
+Differences between C and C++ structs
+
+In C++ structs have a typedef defined automatically, so there is no need to typedef the structures. 
+
+Function overloading allows the same name to be used for different types
+
+Variables passed by reference are passed using & instead of *. 
+
+The default constructor zeroes all the values at the initial declaration. 
+
+& directs to the original value in memory like passing by reference in c 
+
+cout replaces fprint and puts
